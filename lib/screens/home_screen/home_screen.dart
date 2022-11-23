@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      backgroundColor: AppTheme.screenBgBlack,
+      backgroundColor: AppTheme.screenBgWhite,
       body: SingleChildScrollView(
         child: Stack(
           children: [
@@ -31,39 +31,50 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     height: getProportionateScreenHeight(10),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                  Stack(
                     children: [
-                      Container(
-                          decoration: const BoxDecoration(
-                              color: AppTheme.blackBgBtn,
-                              borderRadius: BorderRadius.all(Radius.circular(15))
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 60),
+                            child: Container(
+                                decoration: const BoxDecoration(
+                                    color: AppTheme.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15))),
+                                child: IconButton(
+                                  onPressed: () {},
+                                  icon: Image.asset(
+                                      "assets/icons/notification.png"),
+                                  iconSize: 45,
+                                )),
                           ),
-                          child: IconButton(
-                            onPressed: () {},
-                            icon: Image.asset("assets/icons/notification.png"),
-                            iconSize: 45,
-                      )),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 60),
+                        child: Text(
+                          "Welcome",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w300,
+                              fontSize: getProportionateScreenHeight(25),
+                              color: AppTheme.blackBgBtn),
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 100),
+                        child: Text(
+                          "Ayush",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w900,
+                              fontSize: getProportionateScreenHeight(35),
+                              color: AppTheme.white),
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
                     ],
-                  ),
-                  SizedBox(
-                    height: getProportionateScreenHeight(25),
-                  ),
-                  Text(
-                    "Welcome",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w300,
-                        fontSize: getProportionateScreenHeight(25),
-                        color: AppTheme.white),
-                    textAlign: TextAlign.left,
-                  ),
-                  Text(
-                    "Ayush",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w900,
-                        fontSize: getProportionateScreenHeight(35),
-                        color: AppTheme.white),
-                    textAlign: TextAlign.left,
                   ),
                   SizedBox(
                     height: getProportionateScreenHeight(100),
@@ -75,10 +86,12 @@ class HomeScreen extends StatelessWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.w300,
                             fontSize: getProportionateScreenHeight(25),
-                            color: AppTheme.white),
+                            color: AppTheme.blackBgBtn),
                         textAlign: TextAlign.left,
                       ),
-                      const SizedBox(width: 10.0,),
+                      const SizedBox(
+                        width: 10.0,
+                      ),
                       Text(
                         "VAYU",
                         style: TextStyle(
@@ -89,39 +102,51 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: getProportionateScreenHeight(15),),
+                  SizedBox(
+                    height: getProportionateScreenHeight(15),
+                  ),
                   Container(
                     decoration: BoxDecoration(
-                      border: Border.all(color: AppTheme.grayBorder),
-                      borderRadius: BorderRadius.all(Radius.circular(15))
-                  ),
+                        border: Border.all(color: AppTheme.grayBorder),
+                        borderRadius: BorderRadius.all(Radius.circular(15))),
                     margin: EdgeInsets.symmetric(
-                      vertical: getProportionateScreenHeight(2),
-                      horizontal: getProportionateScreenWidth(2)
-                    ),
+                        vertical: getProportionateScreenHeight(2),
+                        horizontal: getProportionateScreenWidth(2)),
                     child: Column(
                       children: [
-
                         Container(
                           margin: EdgeInsets.symmetric(
-                            vertical: getProportionateScreenHeight(25.0),
-                            horizontal: getProportionateScreenWidth(15.0)
-                          ),
+                              vertical: getProportionateScreenHeight(25.0),
+                              horizontal: getProportionateScreenWidth(15.0)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              IconTextMenuButton(onPressed: (){
-                                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const AbgTest()));
-                              },
+                              IconTextMenuButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const AbgTest()));
+                                  },
                                   icon: Image.asset("assets/icons/health.png"),
                                   buttonText: "Disorder Diagnosis"),
-                              IconTextMenuButton(onPressed: (){
-                                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const XRayUploadScreen()));
-                              },
+                              IconTextMenuButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const XRayUploadScreen()));
+                                  },
                                   icon: Image.asset("assets/icons/xray.png"),
                                   buttonText: "X-Ray Check"),
-                              IconTextMenuButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>WebViewApp()));},
+                              IconTextMenuButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                WebViewApp()));
+                                  },
                                   icon: Image.asset("assets/icons/android.png"),
                                   buttonText: "Health Bot")
                             ],
@@ -148,17 +173,20 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: getProportionateScreenHeight(25),),
+                  SizedBox(
+                    height: getProportionateScreenHeight(25),
+                  ),
                   Text(
                     "COPD INFO",
                     style: TextStyle(
                         fontWeight: FontWeight.w300,
                         fontSize: getProportionateScreenHeight(25),
-                        color: AppTheme.white),
+                        color: AppTheme.blackBgBtn),
                     textAlign: TextAlign.left,
                   ),
-
-                  SizedBox(height: getProportionateScreenHeight(25),),
+                  SizedBox(
+                    height: getProportionateScreenHeight(25),
+                  ),
                   Image(
                     image: const AssetImage('assets/awareness1.jpg'),
                     width: (MediaQuery.of(context).size.width),

@@ -8,9 +8,7 @@ import 'package:vayu/theme/AppTheme.dart';
 import 'package:vayu/theme/SizeConfig.dart';
 import 'package:http/http.dart' as http;
 
-
 class AbgTestReport extends StatelessWidget {
-
   final AbgTestResponse abgTestResponse;
 
   const AbgTestReport({super.key, required this.abgTestResponse});
@@ -18,9 +16,11 @@ class AbgTestReport extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.screenBgBlack,
+      backgroundColor: AppTheme.white,
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(50), horizontal: getProportionateScreenWidth(15)),
+        padding: EdgeInsets.symmetric(
+            vertical: getProportionateScreenHeight(50),
+            horizontal: getProportionateScreenWidth(15)),
         child: Column(
           children: [
             Container(
@@ -29,74 +29,98 @@ class AbgTestReport extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               child: Row(
-
                 mainAxisAlignment: MainAxisAlignment.center,
-
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(15), horizontal: getProportionateScreenWidth(15)),
-                    child: Text('ABG Test Report', textAlign: TextAlign.center, style: TextStyle(color: AppTheme.white, fontWeight: FontWeight.w800, fontSize: getProportionateScreenHeight(35)),),
+                    padding: EdgeInsets.symmetric(
+                        vertical: getProportionateScreenHeight(15),
+                        horizontal: getProportionateScreenWidth(15)),
+                    child: Text(
+                      'ABG Test Report',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: AppTheme.white,
+                          fontWeight: FontWeight.w800,
+                          fontSize: getProportionateScreenHeight(35)),
+                    ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: getProportionateScreenHeight(50),),
+            SizedBox(
+              height: getProportionateScreenHeight(50),
+            ),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    MultipleLineReportBox(
+                        reportType: "Disorder Type: ",
+                        reportData: abgTestResponse.disorder.toString()),
+                    MultipleLineReportBox(
+                        reportType: "Compensation: ",
+                        reportData: abgTestResponse.compensation.toString()),
+                    MultipleLineReportBox(
+                        reportType: "Descriptive Report: ",
+                        reportData: abgTestResponse.report.toString()),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        MultipleLineReportBox(reportType: "Disorder Type: ", reportData: abgTestResponse.disorder.toString()),
-                        MultipleLineReportBox(reportType: "Compensation: ", reportData: abgTestResponse.compensation.toString()),
+                        SingleLineReportBox(
+                            reportType: "Anion Gap: ",
+                            reportData: abgTestResponse.anionGap.toString()),
+                        SingleLineReportBox(
+                            reportType: "PaCo2: ",
+                            reportData: abgTestResponse.paco2.toString()),
                       ],
                     ),
-                    MultipleLineReportBox(reportType: "Descriptive Report: ", reportData: abgTestResponse.report.toString()),
-                    Row(
-
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SingleLineReportBox(reportType: "Anion Gap: ", reportData: abgTestResponse.anionGap.toString()),
-
-                        SingleLineReportBox(reportType: "PaCo2: ", reportData: abgTestResponse.paco2.toString()),
-                      ],
-                    ),
-                      if(abgTestResponse.isMetabolicAcidosis == true)
-                        Column(
-
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SingleLineReportBox(reportType: "Anion Gap Result: ", reportData: abgTestResponse.anionGapResult.toString()),
-                            SingleLineReportBox(reportType: "Delta Ratio Result: ", reportData: abgTestResponse.deltaRatioResult.toString()),
-                          ],
-                        ),
-
+                    if (abgTestResponse.isMetabolicAcidosis == true)
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SingleLineReportBox(
+                              reportType: "Anion Gap Result: ",
+                              reportData:
+                                  abgTestResponse.anionGapResult.toString()),
+                          SingleLineReportBox(
+                              reportType: "Delta Ratio Result: ",
+                              reportData:
+                                  abgTestResponse.deltaRatioResult.toString()),
+                        ],
+                      ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-
-                        SingleLineReportBox(reportType: "Delta Ratio: ", reportData: abgTestResponse.deltaRatio.toString()),
-                        SingleLineReportBox(reportType: "O2Sat: ", reportData: abgTestResponse.o2sat.toString()),
+                        SingleLineReportBox(
+                            reportType: "Delta Ratio: ",
+                            reportData: abgTestResponse.deltaRatio.toString()),
+                        SingleLineReportBox(
+                            reportType: "O2Sat: ",
+                            reportData: abgTestResponse.o2sat.toString()),
                       ],
                     ),
                     Row(
-
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SingleLineReportBox(reportType: "HCO3: ", reportData: abgTestResponse.hco3.toString()),
-                        SingleLineReportBox(reportType: "PaO2: ", reportData: abgTestResponse.paco2.toString()),
+                        SingleLineReportBox(
+                            reportType: "HCO3: ",
+                            reportData: abgTestResponse.hco3.toString()),
+                        SingleLineReportBox(
+                            reportType: "PaO2: ",
+                            reportData: abgTestResponse.paco2.toString()),
                       ],
                     ),
                     Row(
-
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-
-                        SingleLineReportBox(reportType: "Na: ", reportData: abgTestResponse.na.toString()),
-                        SingleLineReportBox(reportType: "Cl: ", reportData: abgTestResponse.cl.toString()),
+                        SingleLineReportBox(
+                            reportType: "Na: ",
+                            reportData: abgTestResponse.na.toString()),
+                        SingleLineReportBox(
+                            reportType: "Cl: ",
+                            reportData: abgTestResponse.cl.toString()),
                       ],
                     ),
                   ],

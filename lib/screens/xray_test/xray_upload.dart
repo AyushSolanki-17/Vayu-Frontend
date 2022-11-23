@@ -14,7 +14,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class XRayUploadScreen extends StatefulWidget{
+class XRayUploadScreen extends StatefulWidget {
   const XRayUploadScreen({super.key});
 
   @override
@@ -22,7 +22,6 @@ class XRayUploadScreen extends StatefulWidget{
 }
 
 class _XRayUploadScreenState extends State<XRayUploadScreen> {
-
   File? image;
   String report = '';
   bool showProcessing = false;
@@ -35,7 +34,6 @@ class _XRayUploadScreenState extends State<XRayUploadScreen> {
 
     setState(() {
       image = File(img!.path);
-
     });
   }
 
@@ -57,87 +55,127 @@ class _XRayUploadScreenState extends State<XRayUploadScreen> {
 
     // add file to multipart
     request.files.add(multipartFile);
-    request.fields['user']=5.toString();
+    request.fields['user'] = 5.toString();
     // send
     var response = await request.send();
 
     // listen for response
     response.stream.transform(utf8.decoder).listen((value) {
-
       setState(() {
         report = jsonDecode(value)["result"];
         showProcessing = false;
       });
     });
   }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      backgroundColor: AppTheme.screenBgBlack,
+      backgroundColor: AppTheme.screenBgWhite,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(50), horizontal: getProportionateScreenWidth(15)),
+          padding: EdgeInsets.symmetric(
+              vertical: getProportionateScreenHeight(50),
+              horizontal: getProportionateScreenWidth(15)),
           child: Column(
-
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-
               Container(
                 decoration: const BoxDecoration(
                   color: AppTheme.primaryGreen,
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(15), horizontal: getProportionateScreenWidth(5)),
+                  padding: EdgeInsets.symmetric(
+                      vertical: getProportionateScreenHeight(15),
+                      horizontal: getProportionateScreenWidth(5)),
                   child: Row(
                     children: [
-                      IconButton(onPressed: (){Navigator.of(context).pop();}, icon: const Icon(Icons.arrow_back_ios_new_sharp)),
-                      Expanded(child: Center(child: Text('X-Ray Test', textAlign: TextAlign.center, style: TextStyle(color: AppTheme.white, fontWeight: FontWeight.w800, fontSize: getProportionateScreenHeight(35)),))),
+                      IconButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          icon: const Icon(Icons.arrow_back_ios_new_sharp)),
+                      Expanded(
+                          child: Center(
+                              child: Text(
+                        'X-Ray Test',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: AppTheme.white,
+                            fontWeight: FontWeight.w800,
+                            fontSize: getProportionateScreenHeight(35)),
+                      ))),
                     ],
                   ),
                 ),
               ),
-              SizedBox(height: getProportionateScreenHeight(100),),
+              SizedBox(
+                height: getProportionateScreenHeight(100),
+              ),
+              Text(
+                'Please upload a Chest X-Ray image to begin',
+                style: TextStyle(color: AppTheme.blackBgBtn, fontSize: 16),
+              ),
+              SizedBox(
+                height: getProportionateScreenHeight(25),
+              ),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppTheme.primaryGreen,
-                ),
-                  onPressed: () async{
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppTheme.primaryGreen,
+                  ),
+                  onPressed: () async {
                     setState(() {
                       showProcessing = true;
                     });
-                await getImage(ImageSource.gallery);
-                upload(image!);
-
-              }, child: const Text("Upload X-RAY")),
-              SizedBox(height: getProportionateScreenHeight(100),),
+                    await getImage(ImageSource.gallery);
+                    upload(image!);
+                  },
+                  child: const Text("Upload X-RAY")),
+              SizedBox(
+                height: getProportionateScreenHeight(100),
+              ),
               image != null
                   ? Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.file(
-                    //to show image, you type like this.
-                    File(image!.path),
-                    fit: BoxFit.cover,
-                    width: MediaQuery.of(context).size.width,
-                    height: 300,
-                  ),
-                ),
-              )
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.file(
+                          //to show image, you type like this.
+                          File(image!.path),
+                          fit: BoxFit.cover,
+                          width: MediaQuery.of(context).size.width,
+                          height: 300,
+                        ),
+                      ),
+                    )
                   : const Text(
-                "No Image",
-                style: TextStyle(fontSize: 20),
+                      "No image choosen",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Color.fromARGB(255, 163, 163, 163)),
+                    ),
+              SizedBox(
+                height: getProportionateScreenHeight(100),
               ),
-              SizedBox(height: getProportionateScreenHeight(100),),
-              showProcessing?const CircularProgressIndicator():SizedBox(height: getProportionateScreenHeight(10),),
+              showProcessing
+                  ? const CircularProgressIndicator()
+                  : SizedBox(
+                      height: getProportionateScreenHeight(10),
+                    ),
               if (report != '')
-                  Text(report.toString(),style: TextStyle(fontSize: getProportionateScreenHeight(35), color: AppTheme.primaryGreen),)
+                Text(
+                  report.toString(),
+                  style: TextStyle(
+                      fontSize: getProportionateScreenHeight(35),
+                      color: AppTheme.primaryGreen),
+                )
               else
-                const SizedBox(height: 2.0,)
-
+                const SizedBox(
+                  height: 2.0,
+                )
             ],
           ),
         ),
