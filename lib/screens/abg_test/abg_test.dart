@@ -67,16 +67,16 @@ class _AbgTestState extends State<AbgTest> {
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(15), horizontal: getProportionateScreenWidth(5)),
+                padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(5), horizontal: getProportionateScreenWidth(5)),
                 child: Row(
                   children: [
                     IconButton(onPressed: (){Navigator.of(context).pop();}, icon: const Icon(Icons.arrow_back_ios_new_sharp)),
-                    Expanded(child: Center(child: Text('ABG Test', textAlign: TextAlign.center, style: TextStyle(color: AppTheme.white, fontWeight: FontWeight.w800, fontSize: getProportionateScreenHeight(35)),))),
+                    Expanded(child: Center(child: Text('ABG Test', textAlign: TextAlign.center, style: TextStyle(color: AppTheme.white, fontWeight: FontWeight.w800, fontSize: getProportionateScreenHeight(25)),))),
                   ],
                 ),
               ),
             ),
-            SizedBox(height: getProportionateScreenHeight(50),),
+            SizedBox(height: getProportionateScreenHeight(25),),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(

@@ -44,23 +44,61 @@ class AbgTestReport extends StatelessWidget {
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SingleLineReportBox(reportType: "Disorder Type: ", reportData: abgTestResponse.disorder.toString()),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        MultipleLineReportBox(reportType: "Disorder Type: ", reportData: abgTestResponse.disorder.toString()),
+                        MultipleLineReportBox(reportType: "Compensation: ", reportData: abgTestResponse.compensation.toString()),
+                      ],
+                    ),
                     MultipleLineReportBox(reportType: "Descriptive Report: ", reportData: abgTestResponse.report.toString()),
-                    SingleLineReportBox(reportType: "Compensation: ", reportData: abgTestResponse.compensation.toString()),
-                    SingleLineReportBox(reportType: "Anion Gap: ", reportData: abgTestResponse.anionGap.toString()),
-                    SingleLineReportBox(reportType: "Delta Ratio: ", reportData: abgTestResponse.deltaRatio.toString()),
+                    Row(
+
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SingleLineReportBox(reportType: "Anion Gap: ", reportData: abgTestResponse.anionGap.toString()),
+
+                        SingleLineReportBox(reportType: "PaCo2: ", reportData: abgTestResponse.paco2.toString()),
+                      ],
+                    ),
                       if(abgTestResponse.isMetabolicAcidosis == true)
-                        SingleLineReportBox(reportType: "Anion Gap Result: ", reportData: abgTestResponse.anionGapResult.toString()),
-                    if(abgTestResponse.isMetabolicAcidosis == true)
-                        SingleLineReportBox(reportType: "Delta Ratio Result: ", reportData: abgTestResponse.deltaRatioResult.toString()),
-                    SingleLineReportBox(reportType: "PH: ", reportData: abgTestResponse.ph.toString()),
-                    SingleLineReportBox(reportType: "PaCo2: ", reportData: abgTestResponse.paco2.toString()),
-                    SingleLineReportBox(reportType: "HCO3: ", reportData: abgTestResponse.hco3.toString()),
-                    SingleLineReportBox(reportType: "PaO2: ", reportData: abgTestResponse.paco2.toString()),
-                    SingleLineReportBox(reportType: "O2Sat: ", reportData: abgTestResponse.o2sat.toString()),
-                    SingleLineReportBox(reportType: "Na: ", reportData: abgTestResponse.na.toString()),
-                    SingleLineReportBox(reportType: "Cl: ", reportData: abgTestResponse.cl.toString()),
+                        Column(
+
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SingleLineReportBox(reportType: "Anion Gap Result: ", reportData: abgTestResponse.anionGapResult.toString()),
+                            SingleLineReportBox(reportType: "Delta Ratio Result: ", reportData: abgTestResponse.deltaRatioResult.toString()),
+                          ],
+                        ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+
+                        SingleLineReportBox(reportType: "Delta Ratio: ", reportData: abgTestResponse.deltaRatio.toString()),
+                        SingleLineReportBox(reportType: "O2Sat: ", reportData: abgTestResponse.o2sat.toString()),
+                      ],
+                    ),
+                    Row(
+
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SingleLineReportBox(reportType: "HCO3: ", reportData: abgTestResponse.hco3.toString()),
+                        SingleLineReportBox(reportType: "PaO2: ", reportData: abgTestResponse.paco2.toString()),
+                      ],
+                    ),
+                    Row(
+
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+
+                        SingleLineReportBox(reportType: "Na: ", reportData: abgTestResponse.na.toString()),
+                        SingleLineReportBox(reportType: "Cl: ", reportData: abgTestResponse.cl.toString()),
+                      ],
+                    ),
                   ],
                 ),
               ),

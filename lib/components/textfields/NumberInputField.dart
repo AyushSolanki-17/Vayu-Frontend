@@ -12,19 +12,19 @@ class NumberInputField extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10.0),
+      margin: const EdgeInsets.all(5.0),
       padding: const EdgeInsets.all(5.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(labelText,style: TextStyle(color: AppTheme.white,fontWeight: FontWeight.w400, fontSize: getProportionateScreenHeight(20)),),
-          const SizedBox(height: 15.0),
+          const SizedBox(height: 5.0),
           TextField(
             cursorColor: AppTheme.primaryGreen,
             style: TextStyle(color: AppTheme.primaryGreen, fontSize: getProportionateScreenHeight(20)),
             decoration: InputDecoration(
-
+              labelText: labelText,
+              labelStyle: TextStyle(color: AppTheme.white,fontWeight: FontWeight.w400, fontSize: getProportionateScreenHeight(15)),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(7.0),
                 borderSide: const BorderSide(color: AppTheme.primaryGreen, width: 3.0),

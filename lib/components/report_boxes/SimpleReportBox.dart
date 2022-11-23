@@ -10,7 +10,12 @@ class SingleLineReportBox extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.all(15.0),
       margin: EdgeInsets.symmetric(vertical: 15.0,horizontal: 5.0),
+      decoration: const BoxDecoration(
+        color: AppTheme.blackBgBtnLight,
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+      ),
       child: Row(
         children: [
           SizedBox(child: Text(reportType,style: TextStyle(fontSize: getProportionateScreenHeight(20), color: AppTheme.white, fontWeight: FontWeight.w300 ),)),
@@ -34,6 +39,11 @@ class MultipleLineReportBox extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.all(15.0),
+      decoration: const BoxDecoration(
+        color: AppTheme.blackBgBtnLight,
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+      ),
       margin: EdgeInsets.symmetric(vertical: 15.0,horizontal: 5.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -41,7 +51,7 @@ class MultipleLineReportBox extends StatelessWidget{
         children: [
           Text(reportType,style: TextStyle(fontSize: getProportionateScreenHeight(20), color: AppTheme.white, fontWeight: FontWeight.w300 ),),
           SizedBox(height: 10.0,),
-          SizedBox(child: Text(reportData, textAlign: TextAlign.justify,style: TextStyle(fontSize: getProportionateScreenHeight(20), color: AppTheme.primaryGreen, fontWeight: FontWeight.w700),)),
+          SizedBox(child: Text(reportData, textAlign: TextAlign.justify,style: TextStyle(fontSize: getProportionateScreenHeight(15), color: AppTheme.primaryGreen, fontWeight: FontWeight.w700),)),
 
         ],
       ),

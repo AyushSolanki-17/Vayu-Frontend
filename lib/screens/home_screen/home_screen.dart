@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vayu/components/buttons/IconTextMenuButton.dart';
 import 'package:vayu/screens/abg_test/abg_test.dart';
+import 'package:vayu/screens/kommunicate_chatbot/chatbot.dart';
 import 'package:vayu/screens/xray_test/xray_upload.dart';
 import 'package:vayu/theme/AppTheme.dart';
 import 'package:vayu/theme/SizeConfig.dart';
@@ -120,13 +121,13 @@ class HomeScreen extends StatelessWidget {
                               },
                                   icon: Image.asset("assets/icons/xray.png"),
                                   buttonText: "X-Ray Check"),
-                              IconTextMenuButton(onPressed: (){},
-                                  icon: Image.asset("assets/icons/infocircle.png"),
-                                  buttonText: "COPD Info")
+                              IconTextMenuButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>WebViewApp()));},
+                                  icon: Image.asset("assets/icons/android.png"),
+                                  buttonText: "Health Bot")
                             ],
                           ),
                         ),
-                        Container(
+                        /*Container(
                           margin: EdgeInsets.symmetric(
                               vertical: getProportionateScreenHeight(25.0),
                               horizontal: getProportionateScreenWidth(15.0)
@@ -140,14 +141,27 @@ class HomeScreen extends StatelessWidget {
                               IconTextMenuButton(onPressed: (){},
                                   icon: Image.asset("assets/icons/useroctagon.png"),
                                   buttonText: "Health Profile"),
-                              IconTextMenuButton(onPressed: (){},
-                                  icon: Image.asset("assets/icons/android.png"),
-                                  buttonText: "Health Bot")
+
                             ],
                           ),
-                        ),
+                        ),*/
                       ],
                     ),
+                  ),
+                  SizedBox(height: getProportionateScreenHeight(25),),
+                  Text(
+                    "COPD INFO",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                        fontSize: getProportionateScreenHeight(25),
+                        color: AppTheme.white),
+                    textAlign: TextAlign.left,
+                  ),
+
+                  SizedBox(height: getProportionateScreenHeight(25),),
+                  Image(
+                    image: const AssetImage('assets/awareness1.jpg'),
+                    width: (MediaQuery.of(context).size.width),
                   ),
                 ],
               ),

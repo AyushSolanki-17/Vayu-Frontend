@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^0.13.5
   image_picker: ^0.8.6
+  webview_flutter: ^3.0.4
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +71,7 @@ flutter:
     - assets/icons/infocircle.png
     - assets/icons/useroctagon.png
     - assets/icons/xray.png
+    - assets/awareness1.jpg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
