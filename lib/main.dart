@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vayu/screens/abg_test/abg_test.dart';
 import 'package:vayu/screens/home_screen/home_screen.dart';
+import 'package:vayu/screens/xray_test/xray_upload.dart';
 
 void main() {
   runApp(const VayuApp());
@@ -14,7 +15,7 @@ class VayuApp extends StatelessWidget{
     return const MaterialApp(
       title: 'VAYU',
       debugShowCheckedModeBanner: false,
-      home: AbgTest(),
+      home: HomeScreen(),
     );
   }
 }

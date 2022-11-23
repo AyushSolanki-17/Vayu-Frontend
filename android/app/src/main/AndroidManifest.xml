@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.ayushsolanki.vayu.vayu">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="vayu"
         android:name="${applicationName}"

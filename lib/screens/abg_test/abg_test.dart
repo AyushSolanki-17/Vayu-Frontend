@@ -28,6 +28,7 @@ class _AbgTestState extends State<AbgTest> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       backgroundColor: AppTheme.screenBgBlack,
       body: Padding(
@@ -39,16 +40,14 @@ class _AbgTestState extends State<AbgTest> {
                 color: AppTheme.primaryGreen,
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
-              child: Row(
-
-                mainAxisAlignment: MainAxisAlignment.center,
-
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(15), horizontal: getProportionateScreenWidth(15)),
-                    child: Text('ABG Test', textAlign: TextAlign.center, style: TextStyle(color: AppTheme.white, fontWeight: FontWeight.w800, fontSize: getProportionateScreenHeight(35)),),
-                  ),
-                ],
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(15), horizontal: getProportionateScreenWidth(5)),
+                child: Row(
+                  children: [
+                    IconButton(onPressed: (){Navigator.of(context).pop();}, icon: const Icon(Icons.arrow_back_ios_new_sharp)),
+                    Expanded(child: Center(child: Text('ABG Test', textAlign: TextAlign.center, style: TextStyle(color: AppTheme.white, fontWeight: FontWeight.w800, fontSize: getProportionateScreenHeight(35)),))),
+                  ],
+                ),
               ),
             ),
             SizedBox(height: getProportionateScreenHeight(50),),

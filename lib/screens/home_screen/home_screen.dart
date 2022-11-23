@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vayu/components/buttons/IconTextMenuButton.dart';
+import 'package:vayu/screens/abg_test/abg_test.dart';
+import 'package:vayu/screens/xray_test/xray_upload.dart';
 import 'package:vayu/theme/AppTheme.dart';
 import 'package:vayu/theme/SizeConfig.dart';
 
@@ -108,10 +110,14 @@ class HomeScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              IconTextMenuButton(onPressed: (){},
+                              IconTextMenuButton(onPressed: (){
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const AbgTest()));
+                              },
                                   icon: Image.asset("assets/icons/health.png"),
                                   buttonText: "Disorder Diagnosis"),
-                              IconTextMenuButton(onPressed: (){},
+                              IconTextMenuButton(onPressed: (){
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const XRayUploadScreen()));
+                              },
                                   icon: Image.asset("assets/icons/xray.png"),
                                   buttonText: "X-Ray Check"),
                               IconTextMenuButton(onPressed: (){},
