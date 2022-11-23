@@ -25,6 +25,7 @@ class _XRayUploadScreenState extends State<XRayUploadScreen> {
 
   File? image;
   String report = '';
+  bool showProcessing = false;
 
   final ImagePicker picker = ImagePicker();
 
@@ -65,6 +66,7 @@ class _XRayUploadScreenState extends State<XRayUploadScreen> {
 
       setState(() {
         report = jsonDecode(value)["result"];
+        showProcessing = false;
       });
     });
   }
@@ -103,8 +105,12 @@ class _XRayUploadScreenState extends State<XRayUploadScreen> {
                   backgroundColor: AppTheme.primaryGreen,
                 ),
                   onPressed: () async{
+                    setState(() {
+                      showProcessing = true;
+                    });
                 await getImage(ImageSource.gallery);
                 upload(image!);
+
               }, child: const Text("Upload X-RAY")),
               SizedBox(height: getProportionateScreenHeight(100),),
               image != null
@@ -126,10 +132,12 @@ class _XRayUploadScreenState extends State<XRayUploadScreen> {
                 style: TextStyle(fontSize: 20),
               ),
               SizedBox(height: getProportionateScreenHeight(100),),
+              showProcessing?const CircularProgressIndicator():SizedBox(height: getProportionateScreenHeight(10),),
               if (report != '')
-                  Text(report.toString(),style: TextStyle(fontSize: getProportionateScreenHeight(15), color: AppTheme.primaryGreen),)
+                  Text(report.toString(),style: TextStyle(fontSize: getProportionateScreenHeight(35), color: AppTheme.primaryGreen),)
               else
                 const SizedBox(height: 2.0,)
+
             ],
           ),
         ),

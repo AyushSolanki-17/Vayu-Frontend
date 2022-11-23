@@ -13,9 +13,12 @@ class SingleLineReportBox extends StatelessWidget{
       margin: EdgeInsets.symmetric(vertical: 15.0,horizontal: 5.0),
       child: Row(
         children: [
-          Text(reportType,style: TextStyle(fontSize: getProportionateScreenHeight(20), color: AppTheme.white, fontWeight: FontWeight.w300 ),),
-          SizedBox(width: 10.0,),
-          SizedBox(child: Text(reportData, textAlign: TextAlign.justify,style: TextStyle(fontSize: getProportionateScreenHeight(20), color: AppTheme.primaryGreen, fontWeight: FontWeight.w700),)),
+          SizedBox(child: Text(reportType,style: TextStyle(fontSize: getProportionateScreenHeight(20), color: AppTheme.white, fontWeight: FontWeight.w300 ),)),
+
+          SizedBox(child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 3.0),
+            child: Text(reportData, textAlign: TextAlign.justify,style: TextStyle(fontSize: getProportionateScreenHeight(20), color: AppTheme.primaryGreen, fontWeight: FontWeight.w700),),
+          )),
 
         ],
       ),

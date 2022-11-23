@@ -26,6 +26,32 @@ class _AbgTestState extends State<AbgTest> {
   TextEditingController naController = TextEditingController();
   TextEditingController clController = TextEditingController();
 
+  bool showProcessing = false;
+  void checkInputs(){
+      // set up the button
+      Widget okButton = TextButton(
+        child: const Text("OK"),
+        onPressed: () { Navigator.of(context).pop(); },
+      );
+      if(phController.text.isEmpty || paco2Controller.text.isEmpty || pao2Controller.text.isEmpty || o2satController.text.isEmpty || hco3Controller.text.isEmpty || naController.text.isEmpty || clController.text.isEmpty){
+        AlertDialog alert = AlertDialog(
+          title: const Text("Error"),
+          content: const Text("Please Fill all the fields with appropriate value"),
+          actions: [
+            okButton,
+          ],
+        );
+
+        // show the dialog
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return alert;
+          },
+        );
+      }
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -64,6 +90,7 @@ class _AbgTestState extends State<AbgTest> {
                     NumberInputField(controller: naController, labelText: "Enter Sodium Ion (Na) value"),
                     NumberInputField(controller: clController, labelText: "Enter Chloride Ion (Cl) value"),
                     PrimaryTextButton(buttontext: "Check Results", onPressed: () async{
+                      checkInputs();
                       abgTestRequest.user = 5;
                       abgTestRequest.ph = double.parse(phController.text);
                       abgTestRequest.paco2 = double.parse(paco2Controller.text);
@@ -72,10 +99,13 @@ class _AbgTestState extends State<AbgTest> {
                       abgTestRequest.o2sat = double.parse(o2satController.text);
                       abgTestRequest.na = double.parse(naController.text);
                       abgTestRequest.cl = double.parse(clController.text);
+                      setState(() {
+                        showProcessing = true;
+                      });
                       final abgReport = await abgRequest(abgTestRequest);
                       Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AbgTestReport(abgTestResponse: abgReport)));
-
-                    })
+                    }),
+                    showProcessing?const CircularProgressIndicator():SizedBox(height: getProportionateScreenHeight(10),)
                   ],
                 ),
               ),
