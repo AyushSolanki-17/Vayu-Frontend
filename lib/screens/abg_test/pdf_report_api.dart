@@ -11,11 +11,10 @@ class PdfReportApi {
       String lastName,
       String age,
       String gender,
+      String disorder,
       String compensation,
       String anionGap,
-      String paco2,
       String deltaRatio,
-      String o2Sat,
       String hco3) async {
     final pdf = Document();
 
@@ -36,7 +35,14 @@ class PdfReportApi {
           Header(
               child: Text('ABG Results given',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
-          variablesEntered(compensation)
+          variablesEntered(disorder, compensation, anionGap, deltaRatio, hco3),
+          SizedBox(height: 50),
+          Text('Generated on 24 November 2022',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.normal,
+                fontStyle: FontStyle.italic,
+              ))
         ],
       ),
     );
@@ -48,7 +54,7 @@ class PdfReportApi {
 //Vayu App title
 Widget buildCustomHeadline() => Header(
       child: Text(
-        'Vayu Report',
+        '  Vayu Report',
         style: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
@@ -81,6 +87,18 @@ Widget patientDetails(firstName, lastName, age, gender) => Column(children: [
     ]);
 
 // Details
-Widget variablesEntered(compensation) => Column(children: [
-      Text('Compensation: ' + compensation, style: TextStyle(fontSize: 14)),
+Widget variablesEntered(disorder, compensation, anionGap, deltaRatio, hco3) =>
+    Column(children: [
+      Text(
+          'Disorder Type: ' +
+              disorder +
+              '\nCompensation: ' +
+              compensation +
+              '\nAnionGap: ' +
+              anionGap +
+              '\nDelta Ratio: ' +
+              deltaRatio +
+              '\nHCO3: ' +
+              hco3,
+          style: TextStyle(fontSize: 14)),
     ]);

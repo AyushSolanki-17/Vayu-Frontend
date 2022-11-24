@@ -151,18 +151,16 @@ class AbgTestReport extends StatelessWidget {
                           child: ElevatedButton(
                             onPressed: () async {
                               final pdfFile = await PdfReportApi.generate(
-                                abgTestResponse.report.toString(),
-                                'Girish',
-                                'Soodeelah',
-                                '23',
-                                'Male',
-                                abgTestResponse.disorder.toString(),
-                                abgTestResponse.compensation.toString(),
-                                abgTestResponse.anionGapResult.toString(),
-                                abgTestResponse.paco2.toString(),
-                                abgTestResponse.deltaRatioResult.toString(),
-                                abgTestResponse.o2sat.toString(),
-                              );
+                                  abgTestResponse.report.toString(),
+                                  'Girish',
+                                  'Soodeelah',
+                                  '23',
+                                  'Male',
+                                  abgTestResponse.disorder.toString(),
+                                  abgTestResponse.compensation.toString(),
+                                  abgTestResponse.anionGapResult.toString(),
+                                  abgTestResponse.deltaRatio.toString(),
+                                  abgTestResponse.hco3.toString());
 
                               PdfApi.openFile(pdfFile);
                             },
