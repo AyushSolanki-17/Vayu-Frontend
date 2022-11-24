@@ -1,12 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vayu/components/buttons/PrimaryTextButton.dart';
 import 'package:vayu/components/report_boxes/SimpleReportBox.dart';
 import 'package:vayu/components/textfields/NumberInputField.dart';
 import 'package:vayu/models/abg_test.dart';
+import 'package:vayu/screens/abg_test/pdfApi.dart';
+import 'package:vayu/screens/abg_test/pdf_report_api.dart';
 import 'package:vayu/theme/AppTheme.dart';
 import 'package:vayu/theme/SizeConfig.dart';
 import 'package:http/http.dart' as http;
+import 'package:syncfusion_flutter_pdf/pdf.dart';
+import 'package:pdf/pdf.dart';
 
 class AbgTestReport extends StatelessWidget {
   final AbgTestResponse abgTestResponse;
@@ -124,7 +130,28 @@ class AbgTestReport extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 10.0,),
-                    ElevatedButton(onPressed: (){}, child: const Text('Connect To Doctor'), style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255,93, 154, 252)),)
+                    ElevatedButton(onPressed: (){}, child: const Text('Connect To Doctor'), style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255,93, 154, 252)),),
+                    SizedBox(height: 10.0,),
+                    ElevatedButton(
+                      onPressed: () async {
+                        final pdfFile = await PdfReportApi.generate(
+                          abgTestResponse.report.toString(),
+                          'Girish',
+                          'Soodeelah',
+                          '23',
+                          'Male',
+                          abgTestResponse.disorder.toString(),
+                          abgTestResponse.compensation.toString(),
+                          abgTestResponse.anionGapResult.toString(),
+                          abgTestResponse.paco2.toString(),
+                          abgTestResponse.deltaRatioResult.toString(),
+                          abgTestResponse.o2sat.toString(),
+                        );
+
+                        PdfApi.openFile(pdfFile);
+                      },
+                      child: Text('Create & download as PDF'),
+                    )
                   ],
                 ),
               ),
