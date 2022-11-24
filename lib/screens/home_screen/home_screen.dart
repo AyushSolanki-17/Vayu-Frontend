@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:vayu/components/buttons/IconTextMenuButton.dart';
 import 'package:vayu/screens/abg_test/abg_test.dart';
 import 'package:vayu/screens/kommunicate_chatbot/chatbot.dart';
+import 'package:vayu/screens/mini_abg/mini_abg_test.dart';
+import 'package:vayu/screens/pft_test/pft_test.dart';
 import 'package:vayu/screens/xray_test/xray_upload.dart';
 import 'package:vayu/theme/AppTheme.dart';
 import 'package:vayu/theme/SizeConfig.dart';
+
+import '../audio_test/AudioTest.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -152,7 +156,7 @@ class HomeScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        /*Container(
+                        Container(
                           margin: EdgeInsets.symmetric(
                               vertical: getProportionateScreenHeight(25.0),
                               horizontal: getProportionateScreenWidth(15.0)
@@ -160,16 +164,25 @@ class HomeScreen extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              IconTextMenuButton(onPressed: (){},
+                              IconTextMenuButton(onPressed: (){Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                      const MiniAbgTest()));},
                                   icon: Image.asset("assets/icons/clipboardtext.png"),
-                                  buttonText: "Past Reports"),
-                              IconTextMenuButton(onPressed: (){},
+                                  buttonText: "ABG"),
+                              IconTextMenuButton(onPressed: (){
+                                Navigator.of(context).push(MaterialPageRoute(builder: (contest)=> const AudioTestUploadScreen() ));
+                              },
                                   icon: Image.asset("assets/icons/useroctagon.png"),
-                                  buttonText: "Health Profile"),
-
+                                  buttonText: "Audio"),
+                              IconTextMenuButton(onPressed: (){
+                                Navigator.of(context).push(MaterialPageRoute(builder: (contest)=> const PftTest() ));
+                              },
+                                  icon: Image.asset("assets/icons/clipboardtext.png"),
+                                  buttonText: "PFT"),
                             ],
                           ),
-                        ),*/
+                        ),
                       ],
                     ),
                   ),

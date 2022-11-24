@@ -68,8 +68,8 @@ class MultipleLineReportBox extends StatelessWidget {
             reportType,
             style: TextStyle(
                 fontSize: getProportionateScreenHeight(20),
-                color: AppTheme.blackBgBtn,
-                fontWeight: FontWeight.w300),
+                color: AppTheme.primaryGreen,
+                fontWeight: FontWeight.w500),
           ),
           SizedBox(
             height: 10.0,
@@ -79,7 +79,7 @@ class MultipleLineReportBox extends StatelessWidget {
             reportData,
             textAlign: TextAlign.justify,
             style: TextStyle(
-                fontSize: getProportionateScreenHeight(15),
+                fontSize: getProportionateScreenHeight(20),
                 color: AppTheme.blackBgBtn,
                 fontWeight: FontWeight.w700),
           )),

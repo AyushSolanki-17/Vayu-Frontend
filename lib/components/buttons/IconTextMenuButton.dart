@@ -22,7 +22,7 @@ class IconTextMenuButton extends StatelessWidget {
         Container(
             margin: const EdgeInsets.all(5.0),
             decoration: const BoxDecoration(
-                color: AppTheme.blackBgBtnLight,
+                color: Color.fromRGBO(245,245,245, 1.0),
                 borderRadius: BorderRadius.all(Radius.circular(15))),
             child: IconButton(
               onPressed: () {

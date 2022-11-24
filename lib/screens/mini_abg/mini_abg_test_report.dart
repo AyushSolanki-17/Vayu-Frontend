@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vayu/components/buttons/PrimaryTextButton.dart';
@@ -7,11 +9,35 @@ import 'package:vayu/models/abg_test.dart';
 import 'package:vayu/theme/AppTheme.dart';
 import 'package:vayu/theme/SizeConfig.dart';
 import 'package:http/http.dart' as http;
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import '../../models/mini_abg.dart';
 
-class AbgTestReport extends StatelessWidget {
-  final AbgTestResponse abgTestResponse;
+class MiniAbgTestReport extends StatelessWidget {
+  final MiniAbgResponse abgTestResponse;
 
-  const AbgTestReport({super.key, required this.abgTestResponse});
+  const MiniAbgTestReport({super.key, required this.abgTestResponse});
+
+  Future<void> generatePDF(AbgTestResponse) async {
+    final pdf = pw.Document();
+
+    pdf.addPage(
+      pw.Page(
+        build: (pw.Context context) => pw.Center(
+          child: pw.Column(
+            children: [
+              pw.Center(child: pw.Text("VAYU REPORT",style: pw.TextStyle(fontSize: 18.0))),
+              pw.Text("Patient Name: Ayush Solanki",style: pw.TextStyle(fontSize: 18.0)),
+              pw.Text("Patient Email: ayush17solanki@gmail.com"),
+            ]
+          ),
+        ),
+      ),
+    );
+
+    final file = File('report.pdf');
+    await file.writeAsBytes(await pdf.save());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,63 +95,17 @@ class AbgTestReport extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SingleLineReportBox(
-                            reportType: "Anion Gap: ",
-                            reportData: abgTestResponse.anionGap.toString()),
+                            reportType: "HCO3: ",
+                            reportData: abgTestResponse.hco3.toString()),
                         SingleLineReportBox(
                             reportType: "PaCo2: ",
                             reportData: abgTestResponse.paco2.toString()),
                       ],
                     ),
-                    if (abgTestResponse.isMetabolicAcidosis == true)
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SingleLineReportBox(
-                              reportType: "Anion Gap Result: ",
-                              reportData:
-                                  abgTestResponse.anionGapResult.toString()),
-                          SingleLineReportBox(
-                              reportType: "Delta Ratio Result: ",
-                              reportData:
-                                  abgTestResponse.deltaRatioResult.toString()),
-                        ],
-                      ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SingleLineReportBox(
-                            reportType: "Delta Ratio: ",
-                            reportData: abgTestResponse.deltaRatio.toString()),
-                        SingleLineReportBox(
-                            reportType: "O2Sat: ",
-                            reportData: abgTestResponse.o2sat.toString()),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SingleLineReportBox(
-                            reportType: "HCO3: ",
-                            reportData: abgTestResponse.hco3.toString()),
-                        SingleLineReportBox(
-                            reportType: "PaO2: ",
-                            reportData: abgTestResponse.paco2.toString()),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SingleLineReportBox(
-                            reportType: "Na: ",
-                            reportData: abgTestResponse.na.toString()),
-                        SingleLineReportBox(
-                            reportType: "Cl: ",
-                            reportData: abgTestResponse.cl.toString()),
-                      ],
-                    ),
                     SizedBox(height: 10.0,),
                     ElevatedButton(onPressed: (){}, child: const Text('Connect To Doctor'), style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255,93, 154, 252)),)
                   ],
+
                 ),
               ),
             ),
