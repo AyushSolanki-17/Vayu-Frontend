@@ -11,8 +11,8 @@ class SingleLineReportBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(15.0),
-      margin: EdgeInsets.symmetric(vertical: 15.0, horizontal: 5.0),
+      padding: EdgeInsets.all(10.0),
+      margin: EdgeInsets.symmetric(horizontal: 5.0),
       decoration: const BoxDecoration(
         color: AppTheme.white,
         borderRadius: BorderRadius.all(Radius.circular(15.0)),
@@ -23,9 +23,9 @@ class SingleLineReportBox extends StatelessWidget {
               child: Text(
             reportType,
             style: TextStyle(
-                fontSize: getProportionateScreenHeight(20),
                 color: AppTheme.blackBgBtn,
-                fontWeight: FontWeight.w300),
+                fontWeight: FontWeight.normal,
+                fontSize: 12),
           )),
           SizedBox(
               child: Padding(
@@ -34,9 +34,9 @@ class SingleLineReportBox extends StatelessWidget {
               reportData,
               textAlign: TextAlign.justify,
               style: TextStyle(
-                  fontSize: getProportionateScreenHeight(20),
+                  fontSize: getProportionateScreenHeight(18),
                   color: AppTheme.primaryGreen,
-                  fontWeight: FontWeight.w700),
+                  fontWeight: FontWeight.w400),
             ),
           )),
         ],
@@ -54,12 +54,12 @@ class MultipleLineReportBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(15.0),
+      padding: EdgeInsets.all(10.0),
       decoration: const BoxDecoration(
         color: AppTheme.white,
         borderRadius: BorderRadius.all(Radius.circular(15.0)),
       ),
-      margin: EdgeInsets.symmetric(vertical: 15.0, horizontal: 5.0),
+      margin: EdgeInsets.symmetric(horizontal: 5.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,9 +79,8 @@ class MultipleLineReportBox extends StatelessWidget {
             reportData,
             textAlign: TextAlign.justify,
             style: TextStyle(
-                fontSize: getProportionateScreenHeight(20),
-                color: AppTheme.blackBgBtn,
-                fontWeight: FontWeight.w700),
+                color: Color.fromARGB(255, 0, 0, 0),
+                fontWeight: FontWeight.normal),
           )),
         ],
       ),

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:url_launcher/url_launcher.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
@@ -28,8 +28,8 @@ class _AudioTestUploadScreenState extends State<AudioTestUploadScreen> {
   bool showProcessing = false;
 
   void uploadAudio(filename) async {
-
-    var request = http.MultipartRequest('POST', Uri.parse(UrlList.audioTestUrl));
+    var request =
+        http.MultipartRequest('POST', Uri.parse(UrlList.audioTestUrl));
     request.files.add(await http.MultipartFile.fromPath('audio', filename));
     request.fields["user"] = 5.toString();
     var res = await request.send();
@@ -77,13 +77,13 @@ class _AudioTestUploadScreenState extends State<AudioTestUploadScreen> {
                       Expanded(
                           child: Center(
                               child: Text(
-                                'Upload Audio',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: AppTheme.white,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: getProportionateScreenHeight(35)),
-                              ))),
+                        'Upload Audio',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: AppTheme.white,
+                            fontWeight: FontWeight.w800,
+                            fontSize: getProportionateScreenHeight(35)),
+                      ))),
                     ],
                   ),
                 ),
@@ -91,8 +91,9 @@ class _AudioTestUploadScreenState extends State<AudioTestUploadScreen> {
               SizedBox(
                 height: getProportionateScreenHeight(100),
               ),
+              // ignore: prefer_const_constructors
               Text(
-                'Please upload a sthethescope audio file',
+                'Please upload a stethoscope audio file',
                 style: TextStyle(color: AppTheme.blackBgBtn, fontSize: 16),
               ),
               SizedBox(
@@ -106,7 +107,8 @@ class _AudioTestUploadScreenState extends State<AudioTestUploadScreen> {
                     setState(() {
                       showProcessing = true;
                     });
-                    FilePickerResult? result = await FilePicker.platform.pickFiles();
+                    FilePickerResult? result =
+                        await FilePicker.platform.pickFiles();
 
                     if (result != null) {
                       file = File(result.files.single.path!);
@@ -115,22 +117,25 @@ class _AudioTestUploadScreenState extends State<AudioTestUploadScreen> {
                   },
                   child: const Text("Upload AudioFile")),
               SizedBox(
-                height: getProportionateScreenHeight(100),
-              ),
-              SizedBox(
-                height: getProportionateScreenHeight(100),
+                height: getProportionateScreenHeight(50),
               ),
               showProcessing
                   ? const CircularProgressIndicator()
                   : SizedBox(
-                height: getProportionateScreenHeight(10),
-              ),
-              if (report!=null)
-                Text(
-                  report["result"],
-                  style: TextStyle(
-                      fontSize: getProportionateScreenHeight(35),
-                      color: AppTheme.primaryGreen),
+                      height: getProportionateScreenHeight(10),
+                    ),
+              if (report != null)
+                Column(
+                  children: [
+                    Text(
+                      report["result"],
+                      style: TextStyle(
+                          fontSize: getProportionateScreenHeight(35),
+                          color: AppTheme.primaryGreen),
+                    ),
+                    Text(
+                        "\nRespiratory sounds are important indicators of respiratory health and respiratory disorders. The sound emitted when a person breathes is directly related to air movement, changes within lung tissue and the position of secretions within the lung. A wheezing sound, for example, is a common sign that a patient has an obstructive airway disease like asthma or chronic obstructive pulmonary disease (COPD)."),
+                  ],
                 )
               else
                 const SizedBox(
@@ -142,5 +147,4 @@ class _AudioTestUploadScreenState extends State<AudioTestUploadScreen> {
       ),
     );
   }
-
 }

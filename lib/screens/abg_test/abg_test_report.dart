@@ -25,15 +25,18 @@ class AbgTestReport extends StatelessWidget {
       backgroundColor: AppTheme.white,
       body: Padding(
         padding: EdgeInsets.symmetric(
-            vertical: getProportionateScreenHeight(50),
-            horizontal: getProportionateScreenWidth(15)),
+          vertical: getProportionateScreenHeight(25),
+        ),
         child: Column(
           children: [
             Container(
+              height: 100,
               decoration: const BoxDecoration(
-                color: AppTheme.primaryGreen,
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-              ),
+                  color: AppTheme.primaryGreen,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(40),
+                    bottomRight: Radius.circular(40),
+                  )),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -54,7 +57,7 @@ class AbgTestReport extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: getProportionateScreenHeight(50),
+              height: getProportionateScreenHeight(20),
             ),
             Expanded(
               child: SingleChildScrollView(
@@ -62,12 +65,20 @@ class AbgTestReport extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    MultipleLineReportBox(
-                        reportType: "Disorder Type: ",
-                        reportData: abgTestResponse.disorder.toString()),
-                    MultipleLineReportBox(
-                        reportType: "Compensation: ",
-                        reportData: abgTestResponse.compensation.toString()),
+                    Row(
+                      children: [
+                        MultipleLineReportBox(
+                            reportType: "Disorder Type: ",
+                            reportData: abgTestResponse.disorder.toString()),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        MultipleLineReportBox(
+                            reportType: "Compensation: ",
+                            reportData:
+                                abgTestResponse.compensation.toString()),
+                      ],
+                    ),
                     MultipleLineReportBox(
                         reportType: "Descriptive Report: ",
                         reportData: abgTestResponse.report.toString()),
@@ -129,29 +140,68 @@ class AbgTestReport extends StatelessWidget {
                             reportData: abgTestResponse.cl.toString()),
                       ],
                     ),
-                    SizedBox(height: 10.0,),
-                    ElevatedButton(onPressed: (){}, child: const Text('Connect To Doctor'), style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255,93, 154, 252)),),
-                    SizedBox(height: 10.0,),
-                    ElevatedButton(
-                      onPressed: () async {
-                        final pdfFile = await PdfReportApi.generate(
-                          abgTestResponse.report.toString(),
-                          'Girish',
-                          'Soodeelah',
-                          '23',
-                          'Male',
-                          abgTestResponse.disorder.toString(),
-                          abgTestResponse.compensation.toString(),
-                          abgTestResponse.anionGapResult.toString(),
-                          abgTestResponse.paco2.toString(),
-                          abgTestResponse.deltaRatioResult.toString(),
-                          abgTestResponse.o2sat.toString(),
-                        );
+                    const SizedBox(
+                      height: 40.0,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: Center(
+                        child: Container(
+                          height: 40,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              final pdfFile = await PdfReportApi.generate(
+                                abgTestResponse.report.toString(),
+                                'Girish',
+                                'Soodeelah',
+                                '23',
+                                'Male',
+                                abgTestResponse.disorder.toString(),
+                                abgTestResponse.compensation.toString(),
+                                abgTestResponse.anionGapResult.toString(),
+                                abgTestResponse.paco2.toString(),
+                                abgTestResponse.deltaRatioResult.toString(),
+                                abgTestResponse.o2sat.toString(),
+                              );
 
-                        PdfApi.openFile(pdfFile);
-                      },
-                      child: Text('Create & download as PDF'),
-                    )
+                              PdfApi.openFile(pdfFile);
+                            },
+                            // ignore: sort_child_properties_last
+                            child: const Text(
+                              'View/Download Report',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                elevation: 0.0,
+                                shadowColor: Colors.transparent,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20))),
+                                backgroundColor: AppTheme.primaryGreen),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Container(
+                        height: 50,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: const Text('Connect To Doctor',
+                              style: TextStyle(fontSize: 16)),
+                          style: ElevatedButton.styleFrom(
+                              elevation: 0.0,
+                              shadowColor: Colors.transparent,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              backgroundColor: AppTheme.primaryGreen),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
                   ],
                 ),
               ),
